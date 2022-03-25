@@ -1,0 +1,17 @@
+Resources:
+  S3BucketInstance:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+
+  DatabaseInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName: MyResourceDatabase
+      AllocatedStorage: 5
+      DBInstanceClass: db.t2.micro
+      AvailabilityZone: us-east-1d
+      Engine: mysql
+      MasterUsername: PrinceIgwe
+      MasterUserPassword: 1234567h
+  
