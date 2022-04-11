@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+
+Description: "A Simple EC2 Instance with Amazon Linux AMI"
+
+Mappings:
+  Regions4AMI:
+
+    us-east-1:
+      AmazonLinux2AMIhvmKernel510: ami-0c02fb55956c7d316
+      AmazonLinux2AMIhvmKernel414: ami-03e0b06f01d45a4eb
+      
+    us-east-2:
+      AmazonLinux2AMIhvmKernel510: ami-064ff912f78e3e561
+      AmazonLinux2AMIhvmKernel414: ami-09662e4f2b2fb67f9
+
+
+Parameters:
+
+  VpcID:
+    Type: AWS::EC2::VPC::Id
+    Description: "The VPC ID associated to your Security group"
+
+  SSHLocation:
+    Type: String
+    Default: 0.0.0.0/0
+    Description: IP Address to EC2 through SSH
+
+  KeyName:
+    Description: "Key Pair to access EC2 VM with SSH"
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: mykey
+    ConstraintDescription: "Must use an existing Key-Pair"
+  
+  InstanceType:
+    Description: "Amazon EC2 Instance Type"
+    Type: String
+    Default: t2.nano
+    AllowedValues:
+      - "t2.micro"
+      - "t2.nano"
+    ConstraintDescription: "Must be a valid instance type"
+
+
+Resources:
+  EC2SecurityInstance:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: "The Security Group Resource"
+      VpcId:
+        Ref: VpcID
+      SecurityGroupEgress: 
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType:
+        Ref: InstanceType ## referring to the InstanceType parameter
+      KeyName:
+        Ref: KeyName
+      ImageId:
+        Fn::FindInMap:
+          - Regions4AMI
+          - Ref: AWS::Region
+          - AmazonLinux2AMIhvmKernel510

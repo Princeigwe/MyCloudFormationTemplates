@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  
+Parameters:
+  
+Resources:
+  Resources:
+  S3BucketInstance:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+
+  DatabaseInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName: MyResourceDatabase
+      AllocatedStorage: 5
+      DBInstanceClass: db.t2.micro
+      AvailabilityZone: us-west-1
+      Engine: mysql
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      Affinity: "String"
+      AvailabilityZone: "String"
+      BlockDeviceMappings:
+        BlockDeviceMappings
+      CpuOptions:
+        CoreCount: Number
+        ThreadsPerCore: Number
+      CreditSpecification:
+        CPUCredits: "Number"
+      DisableApiTermination: false
+      EbsOptimized: false
+      ElasticGpuSpecifications:
+        ElasticGpuSpecifications
+      ElasticInferenceAccelerators:
+        ElasticInferenceAccelerators
+      EnclaveOptions:
+        Enabled: false
+      HibernationOptions:
+        Configured: false
+      HostId: "String"
+      HostResourceGroupArn: "String"
+      IamInstanceProfile: "String"
+      ImageId: "String"
+      InstanceInitiatedShutdownBehavior: "String"
+      InstanceType: "String"
+      Ipv6AddressCount: Number
+      Ipv6Addresses:
+        Ipv6Addresses
+      KernelId: "String"
+      KeyName: "String"
+      LaunchTemplate:
+        LaunchTemplateId: "String"
+        LaunchTemplateName: "String"
+        Version: "String"
+      LicenseSpecifications:
+        LicenseSpecifications
+      Monitoring: String
+      NetworkInterfaces:
+        NetworkInterfaces
+      PlacementGroupName: "String"
+      PrivateDnsNameOptions:
+        EnableResourceNameDnsAAAARecord: false
+        EnableResourceNameDnsARecord: false
+        HostnameType: "String"
+      PrivateIpAddress: "false"
+      PropagateTagsToVolumeOnCreation: String
+      RamdiskId: "String"
+      SecurityGroupIds:
+        SecurityGroupIds
+      SecurityGroups:
+        SecurityGroups
+      SourceDestCheck: false
+      SsmAssociations:
+        SsmAssociations
+      SubnetId: "String"
+      Tags:
+        Tags
+      Tenancy: "String"
+      UserData: "String"
+      Volumes:
+        Volumes
+Outputs:
